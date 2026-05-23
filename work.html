@@ -97,6 +97,8 @@
       .work-section .inner-left { position: static; }
       .work-cta { flex-direction: column; padding: 4rem 1.5rem; }
     }
+    /* Push hero down to clear both nav + subnav */
+    .page-hero { padding-top: 14rem; }
   </style>
 </head>
 <body>
@@ -111,6 +113,52 @@
     </ul>
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
   </nav>
+
+  <!-- SUBHEADER NAV -->
+  <div id="subnav" style="position:fixed;top:72px;left:0;right:0;z-index:99;background:rgba(245,240,232,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(92,107,58,0.12);display:flex;justify-content:flex-end;gap:0;transition:box-shadow 0.3s;padding-right:3rem;">
+    <a href="#consultation" class="subnav-link">Consultation</a>
+    <a href="#workshops" class="subnav-link">Workshops</a>
+    <a href="#selected-work" class="subnav-link">Selected Work</a>
+  </div>
+  <style>
+    .subnav-link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bark);
+      text-decoration: none;
+      opacity: 0.6;
+      padding: 0.85rem 2rem;
+      border-bottom: 2px solid transparent;
+      transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .subnav-link:hover { opacity: 1; }
+    .subnav-link.active { opacity: 1; color: var(--moss); border-bottom-color: var(--moss); }
+    @media (max-width: 600px) {
+      #subnav { top: 62px; }
+      .subnav-link { padding: 0.75rem 1.1rem; font-size: 0.68rem; }
+    }
+  </style>
+  <script>
+    (function() {
+      var links = document.querySelectorAll('.subnav-link');
+      var sections = ['consultation', 'workshops', 'selected-work'];
+      function onScroll() {
+        var scrollY = window.scrollY + 140;
+        var current = sections[0];
+        sections.forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el && el.offsetTop <= scrollY) current = id;
+        });
+        links.forEach(function(l) {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
 
   <!-- PAGE HERO -->
   <div class="page-hero">
@@ -216,7 +264,7 @@
       <div class="inner">
         <div class="section-label">Selected work</div>
         <h2>Nature-inspired <em>projects</em></h2>
-        <p>A small sampling of projects, each applying the full biomimicry process to a real-world challenge.</p>
+        <p>A small sampling of past projects, each applying the full biomimicry process to a real-world challenge.</p>
 
         <div class="project">
           <div class="project-label">Filtration</div>
@@ -263,8 +311,42 @@
       <li><a href="work.html">Work together</a></li>
       <li><a href="index.html#contact">Contact</a></li>
     </ul>
-    <div>© 2026 — All rights reserved</div>
+    <div style="display:flex;align-items:center;gap:1.5rem;">
+      <button id="share-btn" aria-label="Share this site" style="background:none;border:1px solid rgba(245,240,232,0.2);border-radius:2px;color:rgba(245,240,232,0.5);cursor:pointer;display:flex;align-items:center;gap:0.5rem;font-family:'DM Sans',sans-serif;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 1rem;transition:border-color 0.2s,color 0.2s;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        <span id="share-btn-label">Share</span>
+      </button>
+      <div>© 2026 — All rights reserved</div>
+    </div>
   </footer>
+  <script>
+    (function() {
+      var btn = document.getElementById('share-btn');
+      var label = document.getElementById('share-btn-label');
+      btn.addEventListener('click', async function() {
+        var shareData = {
+          title: 'Base Pair to Blueprint',
+          text: 'Nature has been solving complex problems for 3.8 billion years. We help you learn from the best.',
+          url: 'https://basepairtoblueprint.com/'
+        };
+        if (navigator.share) {
+          try { await navigator.share(shareData); } catch(_) {}
+        } else {
+          try {
+            await navigator.clipboard.writeText(shareData.url);
+            label.textContent = 'Copied!';
+            btn.style.color = '#8a9e6e';
+            btn.style.borderColor = '#8a9e6e';
+            setTimeout(function() {
+              label.textContent = 'Share';
+              btn.style.color = '';
+              btn.style.borderColor = '';
+            }, 2000);
+          } catch(_) {}
+        }
+      });
+    })();
+  </script>
 
   <!-- CONTACT MODAL -->
   <div id="contact-modal" style="display:none;position:fixed;inset:0;z-index:500;align-items:center;justify-content:center;padding:1.5rem;">
