@@ -5,7 +5,7 @@
    ============================================================ */
 
 (function () {
-  const FORMSPREE_URL = 'https://formspree.io/f/YOUR_CODE_HERE';
+  const FORMSPREE_URL = 'https://formspree.io/f/xojbwggr';
 
   const modal    = document.getElementById('contact-modal');
   const backdrop = document.getElementById('modal-backdrop');
@@ -24,7 +24,7 @@
     document.body.style.overflow = '';
   }
 
-  document.querySelectorAll('a[href="#contact"], a[href="biomimicry.html#contact"]')
+  document.querySelectorAll('a[href="#contact"], a[href="index.html#contact"]')
     .forEach(link => link.addEventListener('click', openModal));
 
   backdrop.addEventListener('click', closeModal);
