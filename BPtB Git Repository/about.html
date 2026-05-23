@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Biomimicry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="global.css" />
+  <style>
+    /* ── ABOUT-SPECIFIC LAYOUT ── */
+    .about-content { max-width: 100%; margin: 0; padding: 0; }
+
+    .about-section { padding: 7rem clamp(1.5rem, 7vw, 7rem); }
+    .about-section.parchment { background: var(--parchment); }
+
+    .about-section .inner {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--bark);
+      margin-bottom: 1.8rem;
+    }
+    .about-section h2 em { font-style: italic; color: var(--moss); }
+
+    .about-section p {
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--soil);
+      opacity: 0.85;
+      margin-bottom: 1.4rem;
+      max-width: 68ch;
+    }
+    .about-section p:last-child { margin-bottom: 0; }
+
+    .pull-quote {
+      border-left: 2px solid var(--sage);
+      padding: 1.2rem 0 1.2rem 2rem;
+      margin: 2.5rem 0;
+    }
+    .pull-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-style: italic;
+      line-height: 1.5;
+      color: var(--bark);
+      opacity: 1 !important;
+    }
+
+    .credentials { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.5rem; }
+    .credential {
+      background: var(--parchment);
+      border: 1px solid rgba(92,107,58,0.18);
+      border-radius: 3px;
+      padding: 0.75rem 1.2rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      color: var(--bark);
+    }
+    .credential span {
+      display: block;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 0.3rem;
+    }
+
+    .project { border-top: 1px solid rgba(92,107,58,0.12); padding-top: 2rem; margin-top: 2rem; }
+    .project:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+    .project-label { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--sage); margin-bottom: 0.6rem; }
+    .project h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--bark); margin-bottom: 1rem; line-height: 1.3; }
+
+    hr.divider { border: none; border-top: 1px solid rgba(92,107,58,0.12); margin: 4rem 0; }
+
+    .about-cta {
+      background: var(--mist);
+      padding: 7rem clamp(1.5rem, 7vw, 7rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .about-cta h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; color: var(--bark); margin-bottom: 0.5rem; }
+    .about-cta p { font-size: 0.9rem; line-height: 1.7; color: var(--soil); opacity: 0.75; max-width: 42ch; }
+
+    @media (max-width: 900px) {
+      .about-section { padding: 4rem 1.5rem; }
+      .about-section .inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-cta { flex-direction: column; padding: 4rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="biomimicry.html" class="nav-logo"><span><span style="color:#5c7a2e">Base Pair</span> <span style="font-size:0.5em;color:var(--sage)">to</span> <span style="color:#3a8a82">Blueprint</span></span><span class="nav-logo-sub">Biomimicry & Nature-Based Solutions Consulting</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="work.html">Work together</a></li>
+      <li><a href="biomimicry.html#contact">Get in touch</a></li>
+    </ul>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-eyebrow">About</div>
+    <h1>What we <em>believe</em></h1>
+    <p class="tagline">The <span style="color:#3a8a82">blueprint</span> already exists.</p>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="about-content">
+
+    <!-- Philosophy — parchment -->
+    <div class="about-section parchment">
+      <div class="inner">
+        <div class="inner-left">
+          <div class="section-label">Philosophy</div>
+          <h2>Nature has already<br><em>done the work</em></h2>
+        </div>
+        <div class="inner-right">
+          <p>We were founded on the principle that limiting ourselves to the history of human knowledge has not been enough to build a sustainable future. Modern human-centered design, for all its strengths, has forgotten and is largely blind to the fact that nature has already solved the problems we are struggling with. And often, solved them better. From basic building blocks, performing chemistry in water, and no wasteful byproducts, nature produces the most complex and efficient materials, systems, and functions. Sticking with what we know, ignores the wisdom of the world around us.</p>
+          <p>Every organism on this planet has systems, strategies, and functions that have survived 3.8 billion years. Each one is specialized, adapted, and field-tested in ways that dwarf anything we have built. We believe in the question of not how can we master nature, but what nature has already mastered that we can learn from and use?</p>
+          <p>Whether we are applying the deep principles of convergent evolution or utilizing nature itself, nature-derived solutions offer the only sustainable path forward. If the natural world is the greatest R&D department, then capitalism has a vested interest in protecting it, and preserving it is not only an ethical position but also a strategic one.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Who we are — cream -->
+    <div class="about-section">
+      <div class="inner">
+        <div class="inner-left">
+          <div class="section-label">Who we are</div>
+          <h2>Nathaniel O'Neal — <em>founder</em></h2>
+        </div>
+        <div class="inner-right">
+          <p>Nathaniel is a biochemist, biomimic, and former Peace Corps volunteer. His undergraduate <a href="https://pubs.acs.org/doi/abs/10.1021/acs.joc.6b00340" target="_blank" rel="noopener noreferrer" style="color: var(--moss); text-decoration: underline; text-underline-offset: 3px; transition: color 0.2s;">research</a> at the University of Oregon's Clark Honors College produced new molecules previously unseen in nature. This work revealed as much about the limits of human knowledge as it did about its potential.</p>
+          <p>Two years teaching chemistry in Liberia brought those limits into perspective. Surrounded by plastic waste, and hearing older generations describe how their community had come to look dirty from materials that simply didn't exist in their youth, something had to change.</p>
+          <p>He found that answer in biomimicry. A Master's degree at Arizona State University gave him the tools to pursue it and he has been passionate about sharing that work since.</p>
+
+          <div class="credentials">
+            <div class="credential">
+              <span>Graduate</span>
+              M.S. Biomimicry — Arizona State University
+            </div>
+            <div class="credential">
+              <span>Undergraduate</span>
+              B.S. Biochemistry — University of Oregon, Clark Honors College
+            </div>
+            <div class="credential">
+              <span>Based in</span>
+              San Francisco, California
+            </div>
+            <div class="credential">
+              <span>Connect</span>
+              <a href="https://www.linkedin.com/in/nathaniel-o-neal-8799751b5/" target="_blank" rel="noopener noreferrer" style="color: var(--moss); text-decoration: none; transition: color 0.2s;">LinkedIn ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA — mist -->
+    <div class="about-cta">
+      <div>
+        <h3>Ready to learn from nature?</h3>
+        <p>Whether you have a specific challenge or are just beginning to explore, get in touch and let's see what nature has already figured out.</p>
+      </div>
+      <a href="biomimicry.html#contact" class="btn-primary">Get in touch</a>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="biomimicry.html" class="footer-logo"><span style="color:#5c7a2e">Base Pair</span> <span style="font-size:0.5em">to</span> <span style="color:#3a8a82">Blueprint</span></a>
+    <ul class="footer-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="work.html">Work together</a></li>
+      <li><a href="biomimicry.html#contact">Contact</a></li>
+    </ul>
+    <div>© 2026 — All rights reserved</div>
+  </footer>
+
+  <!-- CONTACT MODAL — shared HTML, powered by modal.js -->
+  <div id="contact-modal" style="display:none;position:fixed;inset:0;z-index:500;align-items:center;justify-content:center;padding:1.5rem;">
+    <div id="modal-backdrop" style="position:absolute;inset:0;background:rgba(44,31,14,0.55);backdrop-filter:blur(4px);"></div>
+    <div style="position:relative;background:var(--cream);border-radius:3px;padding:3rem;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(44,31,14,0.2);">
+      <button id="modal-close" style="position:absolute;top:1.2rem;right:1.2rem;background:none;border:none;cursor:pointer;color:var(--sage);font-size:1.4rem;line-height:1;padding:0.2rem 0.5rem;transition:color 0.2s;" aria-label="Close">&#x2715;</button>
+      <div id="modal-form-view">
+        <div style="font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);margin-bottom:0.8rem;">Get in touch</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--bark);margin-bottom:1.8rem;line-height:1.2;">Ready to learn <em style="color:var(--moss)">from nature?</em></h2>
+        <form id="contact-form" class="form">
+          <div class="form-row">
+            <div class="field"><label for="modal-first">First name</label><input id="modal-first" type="text" placeholder="Alexander" required /></div>
+            <div class="field"><label for="modal-last">Last name</label><input id="modal-last" type="text" placeholder="Humboldt" required /></div>
+          </div>
+          <div class="field"><label for="modal-email">Email</label><input id="modal-email" type="email" placeholder="alexander@example.com" required /></div>
+          <div class="field"><label for="modal-interest">I'm interested in</label>
+            <select id="modal-interest"><option value="">Select an option…</option><option>Consultation</option><option>Workshop</option><option>Just learning more</option><option>Something else</option></select>
+          </div>
+          <div class="field"><label for="modal-message">Tell me more</label><textarea id="modal-message" placeholder="Share a bit about what you're working on, your background, or what draws you to biomimicry…"></textarea></div>
+          <button type="submit" class="form-submit">Send message</button>
+        </form>
+      </div>
+      <div id="modal-thankyou-view" style="display:none;text-align:center;padding:2rem 0;">
+        <div style="font-size:2rem;margin-bottom:1.2rem;">🌿</div>
+        <div style="font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);margin-bottom:0.8rem;">Message received</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--bark);margin-bottom:1rem;line-height:1.2;">Thank you for <em style="color:var(--moss)">reaching out</em></h2>
+        <p style="font-size:0.95rem;line-height:1.7;color:var(--soil);opacity:0.75;max-width:36ch;margin:0 auto 2rem;">We'll be in touch soon. In the meantime, nature is doing something remarkable right outside your window.</p>
+        <button onclick="document.getElementById('contact-modal').style.display='none';document.body.style.overflow='';" class="form-submit">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="modal.js"></script>
+
+</body>
+</html>
