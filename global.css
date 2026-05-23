@@ -252,7 +252,8 @@ footer {
   border: none;
   cursor: pointer;
   padding: 0.4rem;
-  z-index: 200;
+  position: relative;
+  z-index: 300;
 }
 .nav-hamburger span {
   display: block;
@@ -269,22 +270,27 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
-  nav { padding: 1.2rem 1.5rem; }
+  nav {
+    padding: 1.2rem 1.5rem;
+    position: fixed;
+    z-index: 200;
+  }
   .nav-hamburger { display: flex; }
 
   .nav-links {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     position: fixed;
     top: 0; left: 0; right: 0;
-    background: rgba(245,240,232,0.97);
-    backdrop-filter: blur(10px);
+    background: rgba(245,240,232,0.98);
+    backdrop-filter: blur(12px);
     padding: 6rem 2rem 3rem;
     gap: 2rem;
     transform: translateY(-100%);
     transition: transform 0.35s ease;
-    z-index: 150;
+    z-index: 250;
     border-bottom: 1px solid rgba(92,107,58,0.15);
+    list-style: none;
   }
   .nav-links.open { transform: translateY(0); }
   .nav-links a { font-size: 1.1rem; letter-spacing: 0.1em; opacity: 0.85; }
