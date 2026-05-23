@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biomimicry — Learn. Design. Belong to Nature.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="global.css" />
+  <style>
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(92,107,58,0.12);
+      text-align: center;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 8rem 5rem 5rem;
+      max-width: 780px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--moss);
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 2rem;
+      height: 1px;
+      background: #5c6b3a;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 5vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--soil);
+      margin-bottom: 2rem;
+      animation: fadeUp 1s ease 0.4s both;
+    }
+    h1 em { font-style: italic; color: var(--moss); }
+
+    .hero-body {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--bark);
+      opacity: 0.85;
+      max-width: 52ch;
+      margin-bottom: 3rem;
+      animation: fadeUp 1s ease 0.6s both;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 1s ease 0.8s both;
+    }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sage);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      animation: fadeUp 1s ease 1.2s both;
+      z-index: 3;
+    }
+    .scroll-line {
+      width: 0;
+      height: 1px;
+      background: var(--sage);
+      animation: growLine 1.5s ease 1.5s forwards;
+    }
+    @keyframes growLine { to { width: 2.5rem; } }
+
+    /* ── VINES ── */
+    .vine { position: absolute; bottom: 0; pointer-events: none; z-index: 1; }
+    .vine-left { left: 5%; }
+    .vine-right { right: 5%; }
+
+    .vine-path {
+      stroke-dashoffset: 9999;
+      animation: growVine 10s linear 0.8s forwards;
+    }
+    .vine-leaf { opacity: 0; animation: fadeLeaf 0.5s ease forwards; }
+    .vine-leaf:nth-child(2)  { animation-delay: 1.4s; }
+    .vine-leaf:nth-child(3)  { animation-delay: 2.6s; }
+    .vine-leaf:nth-child(4)  { animation-delay: 3.8s; }
+    .vine-leaf:nth-child(5)  { animation-delay: 5.0s; }
+    .vine-leaf:nth-child(6)  { animation-delay: 5.8s; }
+    .vine-leaf:nth-child(7)  { animation-delay: 6.6s; }
+    .vine-leaf:nth-child(8)  { animation-delay: 7.8s; }
+    .vine-leaf:nth-child(9)  { animation-delay: 9.0s; }
+    .vine-leaf:nth-child(10) { animation-delay: 10.2s; }
+
+    @keyframes growVine { to { stroke-dashoffset: 0; } }
+    @keyframes fadeLeaf {
+      from { opacity: 0; transform: scale(0.4); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 7rem 5rem; }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 1px;
+      background: var(--sage);
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.2rem, 3.5vw, 3.5rem);
+      line-height: 1.1;
+      color: var(--soil);
+      margin-bottom: 1.5rem;
+    }
+    h2 em { font-style: italic; color: var(--moss); }
+
+    /* ── WHAT IS BIOMIMICRY ── */
+    .what { background: var(--parchment); display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .what-text p { font-size: 1.05rem; line-height: 1.8; color: var(--bark); margin-bottom: 1.2rem; opacity: 0.9; }
+
+    .stat-row { display: flex; gap: 3rem; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(92,107,58,0.2); }
+    .stat { flex: 1; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--moss); line-height: 1; }
+    .stat-desc { font-size: 0.78rem; letter-spacing: 0.05em; color: var(--bark); opacity: 0.7; margin-top: 0.4rem; }
+
+    .what-visual { position: relative; height: 420px; }
+    .ring { position: absolute; border-radius: 50%; border: 1px solid rgba(92,107,58,0.25); z-index: 1; }
+    .ring-1 { inset: 25%; animation: rotateSlow 40s linear infinite; }
+    .ring-2 { inset: calc(25% + 40px); animation: rotateSlow 28s linear infinite reverse; }
+    .ring-3 { inset: calc(25% + 80px); animation: rotateSlow 20s linear infinite; }
+    .ring-dot { position: absolute; width: 8px; height: 8px; background: var(--gold); border-radius: 50%; top: -4px; left: 50%; transform: translateX(-50%); }
+    .what-center-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 2; }
+
+    /* ── OFFERINGS ── */
+    .offerings { background: var(--cream); }
+    .offerings-header { max-width: 55ch; margin-bottom: 4rem; }
+    .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 860px; margin: 0 auto; }
+    .card { background: var(--parchment); border: 1px solid rgba(92,107,58,0.15); border-radius: 4px; padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; }
+    .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: #5c6b3a; transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(44,31,14,0.1); }
+    .card:hover::before { transform: scaleX(1); }
+    .card-icon { width: 48px; height: 48px; margin-bottom: 1.5rem; color: var(--moss); }
+    .card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 400; color: var(--soil); margin-bottom: 0.8rem; }
+    .card p { font-size: 0.92rem; line-height: 1.7; color: var(--bark); opacity: 0.85; margin-bottom: 1.5rem; }
+    .card-link { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--moss); text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: gap 0.2s; }
+    .card-link:hover { gap: 0.9rem; }
+
+    /* ── PROCESS ── */
+    .process { background: var(--soil); color: var(--cream); position: relative; overflow: hidden; }
+    .process::before { content: ''; position: absolute; top: -200px; right: -200px; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(92,107,58,0.2) 0%, transparent 70%); }
+    .process h2 { color: var(--lichen); }
+    .process h2 em { color: var(--sage); }
+    .process .section-label { color: rgba(184,196,160,0.6); }
+    .process .section-label::before { background: rgba(184,196,160,0.4); }
+    .process-header { max-width: 55ch; margin-bottom: 4rem; }
+    .process-flow { display: flex; align-items: center; gap: 0; position: relative; }
+    .process-connector-line { height: 1px; min-width: 1.5rem; background: rgba(138,158,110,0.3); flex-shrink: 0; }
+    .process-fork { display: flex; flex-direction: column; gap: 2.5rem; position: relative; }
+    .process-fork::before { content: ''; position: absolute; left: 0; top: 25%; bottom: 25%; width: 1px; background: rgba(138,158,110,0.3); }
+    .fork-row { display: flex; align-items: center; }
+    .fork-tick { width: 1.5rem; height: 1px; background: rgba(138,158,110,0.3); flex-shrink: 0; }
+    .step-path-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); opacity: 0.7; margin-bottom: 0.4rem; }
+    .step { padding: 0 1.2rem; position: relative; min-width: 120px; }
+    .step-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--moss); opacity: 0.5; line-height: 1; margin-bottom: 1.2rem; }
+    .step h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--lichen); margin-bottom: 0.7rem; }
+    .step p { font-size: 0.88rem; line-height: 1.65; color: rgba(184,196,160,0.7); }
+
+    /* ── PULL QUOTE ── */
+    .quote-section { background: var(--mist); text-align: center; padding: 6rem 5rem; }
+    blockquote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.6rem, 2.5vw, 2.4rem); font-weight: 300; line-height: 1.45; color: var(--soil); max-width: 70ch; margin: 0 auto 2rem; }
+    .quote-attr { font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); }
+
+    /* ── CONTACT ── */
+    .contact { background: var(--parchment); display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .contact-info p { font-size: 1rem; line-height: 1.75; color: var(--bark); opacity: 0.85; margin-bottom: 2rem; }
+    .contact-detail { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 2rem; }
+    .contact-detail-item { display: flex; align-items: center; gap: 0.8rem; font-size: 0.88rem; color: var(--bark); opacity: 0.8; }
+    .contact-detail-item svg { color: var(--moss); flex-shrink: 0; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes rotateSlow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-left { padding: 9rem 2rem 5rem; }
+      section { padding: 5rem 2rem; }
+      .what { grid-template-columns: 1fr; gap: 3rem; }
+      .what-visual { display: none; }
+      .cards { grid-template-columns: 1fr; }
+      .contact { grid-template-columns: 1fr; gap: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="biomimicry.html" class="nav-logo"><span><span style="color:#5c7a2e">Base Pair</span> <span style="font-size:0.5em;color:var(--sage)">to</span> <span style="color:#3a8a82">Blueprint</span></span><span class="nav-logo-sub">Biomimicry & Nature-Based Solutions Consulting</span></a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="work.html">Work together</a></li>
+      <li><a href="#contact">Get in touch</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="about">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Nature-inspired design & learning</div>
+      <h1>What if nature<br>already solved<br><em>your problem?</em></h1>
+      <p class="hero-body">
+        Biomimicry is the practice of learning from and applying nature's time-tested strategies for a more sustainable and resilient future. From no-clog filters that separate microplastics from water to social media content algorithms — nature's wisdom can be applied everywhere. And sometimes, the solution is even nature itself.
+      </p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn-primary">Get in touch</a>
+        <a href="work.html" class="btn-ghost">Explore offerings</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span class="scroll-line"></span>
+      Scroll to explore
+    </div>
+
+    <!-- Left vine -->
+    <svg class="vine vine-left" width="210" height="1050" viewBox="0 0 140 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path class="vine-path" d="M60 700 C55 650 70 620 50 580 C30 540 65 510 45 470 C25 430 60 400 40 360 C20 320 55 285 35 245 C15 205 50 170 30 130 C15 100 40 70 36 73" stroke="#5c6b3a" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+      <g class="vine-leaf" style="transform-origin: 52px 660px"><path d="M52 668 C32 656 18 640 26 624 C42 630 54 648 52 668Z" fill="#8a9e6e" opacity="0.45"/><path d="M52 668 C38 652 26 637 26 624" stroke="#5c6b3a" stroke-width="0.8" stroke-linecap="round" opacity="0.45" fill="none"/></g>
+      <g class="vine-leaf" style="transform-origin: 45px 580px"><path d="M45 590 C20 575 5 555 15 535 C35 542 50 562 45 590Z" fill="#8a9e6e" opacity="0.42"/><path d="M45 590 C30 571 18 554 15 535" stroke="#5c6b3a" stroke-width="0.8" stroke-linecap="round" opacity="0.42" fill="none"/></g>
+      <g class="vine-leaf" style="transform-origin: 55px 500px"><path d="M55 510 C80 495 100 478 94 458 C74 462 55 478 55 510Z" fill="#5c6b3a" opacity="0.35"/><path d="M55 510 C72 493 89 476 94 458" stroke="#5c6b3a" stroke-width="0.8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M70 494 L84 474" stroke="#4a3520" stroke-width="0.5" opacity="0.25" fill="none"/></g>
+      <g class="vine-leaf" style="transform-origin: 40px 420px"><path d="M40 432 C15 414 0 392 10 372 C30 380 45 404 40 432Z" fill="#8a9e6e" opacity="0.4"/><path d="M40 432 C22 412 8 392 10 372" stroke="#5c6b3a" stroke-width="0.8" stroke-linecap="round" opacity="0.4" fill="none"/><path d="M28 415 L18 397 L22 390" stroke="#4a7a6e" stroke-width="0.6" opacity="0.35" fill="none"/></g>
+      <g class="vine-leaf" style="transform-origin: 42px 330px; transform: rotate(-28deg)"><path d="M42 344 C18 330 2 308 12 288 C32 296 46 318 42 344Z" fill="#4a7a6e" opacity="0.32"/><path d="M28 326 L14 309 L14 299" stroke="#5c9e8a" stroke-width="0.8" opacity="0.5" fill="none"/><path d="M28 326 L20 316 L6 316" stroke="#5c9e8a" stroke-width="0.6" opacity="0.4" fill="none"/><circle cx="14" cy="299" r="1.5" fill="#5c9e8a" opacity="0.5"/><circle cx="6" cy="316" r="1.5" fill="#5c9e8a" opacity="0.4"/></g>
+      <g class="vine-leaf" style="transform-origin: 48px 295px; transform: rotate(22deg)"><path d="M48 308 C72 294 88 272 78 252 C58 260 44 282 48 308Z" fill="#4a7a6e" opacity="0.30"/><path d="M62 290 L76 273 L76 263" stroke="#5c9e8a" stroke-width="0.8" opacity="0.5" fill="none"/><path d="M62 290 L70 280 L84 280" stroke="#5c9e8a" stroke-width="0.6" opacity="0.4" fill="none"/><circle cx="76" cy="263" r="1.5" fill="#5c9e8a" opacity="0.5"/><circle cx="84" cy="280" r="1.5" fill="#5c9e8a" opacity="0.4"/></g>
+      <g class="vine-leaf" style="transform-origin: 35px 248px"><path d="M35 260 L10 245 L9 225 L30 210 L52 218 L50 240Z" fill="#2a6a6e" opacity="0.3"/><path d="M35 260 L10 245 L9 225 L30 210 L52 218 L50 240Z" stroke="#5cb8c4" stroke-width="0.7" opacity="0.42" fill="none"/><path d="M30 210 L30 200 L22 200" stroke="#5cb8c4" stroke-width="0.7" opacity="0.48" fill="none"/><path d="M28 236 L18 236 L18 226" stroke="#5cb8c4" stroke-width="0.6" opacity="0.4" fill="none"/><circle cx="22" cy="200" r="1.8" fill="#5cb8c4" opacity="0.52"/><circle cx="18" cy="226" r="1.5" fill="#5cb8c4" opacity="0.42"/></g>
+      <g class="vine-leaf" style="transform-origin: 42px 168px"><path d="M42 183 L18 166 L20 145 L44 133 L68 144 L66 166Z" fill="#1a4a6e" opacity="0.28"/><path d="M42 183 L18 166 L20 145 L44 133 L68 144 L66 166Z" stroke="#5cb8c4" stroke-width="0.7" opacity="0.45" fill="none"/><path d="M44 133 L44 122 L36 122" stroke="#5cb8c4" stroke-width="0.7" opacity="0.5" fill="none"/><path d="M18 166 L8 166 L8 152" stroke="#5cb8c4" stroke-width="0.7" opacity="0.45" fill="none"/><path d="M44 156 L54 156 L54 146" stroke="#5cb8c4" stroke-width="0.6" opacity="0.4" fill="none"/><circle cx="36" cy="122" r="1.8" fill="#5cb8c4" opacity="0.55"/><circle cx="8" cy="152" r="1.5" fill="#5cb8c4" opacity="0.45"/><circle cx="54" cy="146" r="1.5" fill="#5cb8c4" opacity="0.45"/></g>
+      <g class="vine-leaf" style="transform-origin: 38px 100px"><path d="M38 116 L14 100 L16 78 L40 66 L64 77 L62 100Z" fill="#1a3a5c" opacity="0.3"/><path d="M38 116 L14 100 L16 78 L40 66 L64 77 L62 100Z" stroke="#4ab8e8" stroke-width="0.8" opacity="0.55" fill="none"/><rect x="26" y="80" width="26" height="18" rx="1" stroke="#4ab8e8" stroke-width="0.6" opacity="0.4" fill="none"/><line x1="31" y1="80" x2="31" y2="76" stroke="#4ab8e8" stroke-width="0.6" opacity="0.5"/><line x1="38" y1="80" x2="38" y2="76" stroke="#4ab8e8" stroke-width="0.6" opacity="0.5"/><line x1="45" y1="80" x2="45" y2="76" stroke="#4ab8e8" stroke-width="0.6" opacity="0.5"/><line x1="31" y1="98" x2="31" y2="102" stroke="#4ab8e8" stroke-width="0.6" opacity="0.5"/><line x1="38" y1="98" x2="38" y2="102" stroke="#4ab8e8" stroke-width="0.6" opacity="0.5"/><line x1="45" y1="98" x2="45" y2="102" stroke="#4ab8e8" stroke-width="0.6" opacity="0.5"/><path d="M14 100 L4 100 L4 88 L0 88" stroke="#4ab8e8" stroke-width="0.7" opacity="0.5" fill="none"/><path d="M16 78 L8 70 L8 58" stroke="#4ab8e8" stroke-width="0.7" opacity="0.45" fill="none"/><path d="M62 100 L72 100 L72 86" stroke="#4ab8e8" stroke-width="0.7" opacity="0.45" fill="none"/><circle cx="0" cy="88" r="2" fill="#4ab8e8" opacity="0.6"/><circle cx="8" cy="58" r="2" fill="#4ab8e8" opacity="0.55"/><circle cx="72" cy="86" r="2" fill="#4ab8e8" opacity="0.5"/></g>
+    </svg>
+
+    <!-- Right vine -->
+    <svg class="vine vine-right" width="210" height="1050" viewBox="0 0 140 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path class="vine-path" d="M80 700 C85 650 70 620 90 580 C110 540 75 510 95 470 C115 430 80 400 100 360 C120 320 85 285 105 245 C125 205 90 170 110 130 C125 100 100 70 104 73" stroke="#5c6b3a" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.5"/>
+      <g class="vine-leaf" style="transform-origin: 88px 660px"><path d="M88 668 C108 656 122 640 114 624 C98 630 86 648 88 668Z" fill="#8a9e6e" opacity="0.45"/><path d="M88 668 C102 652 114 637 114 624" stroke="#5c6b3a" stroke-width="0.8" stroke-linecap="round" opacity="0.45" fill="none"/></g>
+      <g class="vine-leaf" style="transform-origin: 95px 580px"><path d="M95 590 C120 575 135 555 125 535 C105 542 90 562 95 590Z" fill="#8a9e6e" opacity="0.42"/><path d="M95 590 C110 571 122 554 125 535" stroke="#5c6b3a" stroke-width="0.8" stroke-linecap="round" opacity="0.42" fill="none"/></g>
+      <g class="vine-leaf" style="transform-origin: 85px 500px"><path d="M85 510 C60 495 40 478 46 458 C66 462 85 478 85 510Z" fill="#5c6b3a" opacity="0.35"/><path d="M85 510 C68 493 51 476 46 458" stroke="#5c6b3a" stroke-width="0.8" stroke-linecap="round" opacity="0.38" fill="none"/><path d="M70 494 L56 474" stroke="#4a3520" stroke-width="0.5" opacity="0.25" fill="none"/></g>
+      <g class="vine-leaf" style="transform-origin: 100px 420px"><path d="M100 432 C125 414 140 392 130 372 C110 380 95 404 100 432Z" fill="#8a9e6e" opacity="0.4"/><path d="M100 432 C118 412 132 392 130 372" stroke="#5c6b3a" stroke-width="0.8" stroke-linecap="round" opacity="0.4" fill="none"/><path d="M112 415 L122 397 L118 390" stroke="#4a7a6e" stroke-width="0.6" opacity="0.35" fill="none"/></g>
+      <g class="vine-leaf" style="transform-origin: 98px 330px; transform: rotate(28deg)"><path d="M98 344 C122 330 138 308 128 288 C108 296 94 318 98 344Z" fill="#4a7a6e" opacity="0.32"/><path d="M112 326 L126 309 L126 299" stroke="#5c9e8a" stroke-width="0.8" opacity="0.5" fill="none"/><path d="M112 326 L120 316 L134 316" stroke="#5c9e8a" stroke-width="0.6" opacity="0.4" fill="none"/><circle cx="126" cy="299" r="1.5" fill="#5c9e8a" opacity="0.5"/><circle cx="134" cy="316" r="1.5" fill="#5c9e8a" opacity="0.4"/></g>
+      <g class="vine-leaf" style="transform-origin: 92px 295px; transform: rotate(-22deg)"><path d="M92 308 C68 294 52 272 62 252 C82 260 96 282 92 308Z" fill="#4a7a6e" opacity="0.30"/><path d="M78 290 L64 273 L64 263" stroke="#5c9e8a" stroke-width="0.8" opacity="0.5" fill="none"/><path d="M78 290 L70 280 L56 280" stroke="#5c9e8a" stroke-width="0.6" opacity="0.4" fill="none"/><circle cx="64" cy="263" r="1.5" fill="#5c9e8a" opacity="0.5"/><circle cx="56" cy="280" r="1.5" fill="#5c9e8a" opacity="0.4"/></g>
+      <g class="vine-leaf" style="transform-origin: 105px 248px"><path d="M105 260 L130 245 L131 225 L110 210 L88 218 L90 240Z" fill="#2a6a6e" opacity="0.3"/><path d="M105 260 L130 245 L131 225 L110 210 L88 218 L90 240Z" stroke="#5cb8c4" stroke-width="0.7" opacity="0.42" fill="none"/><path d="M110 210 L110 200 L118 200" stroke="#5cb8c4" stroke-width="0.7" opacity="0.48" fill="none"/><path d="M112 236 L122 236 L122 226" stroke="#5cb8c4" stroke-width="0.6" opacity="0.4" fill="none"/><circle cx="118" cy="200" r="1.8" fill="#5cb8c4" opacity="0.52"/><circle cx="122" cy="226" r="1.5" fill="#5cb8c4" opacity="0.42"/></g>
+      <g class="vine-leaf" style="transform-origin: 98px 168px"><path d="M98 183 L122 166 L120 145 L96 133 L72 144 L74 166Z" fill="#1a4a6e" opacity="0.28"/><path d="M98 183 L122 166 L120 145 L96 133 L72 144 L74 166Z" stroke="#5cb8c4" stroke-width="0.7" opacity="0.45" fill="none"/><path d="M96 133 L96 122 L104 122" stroke="#5cb8c4" stroke-width="0.7" opacity="0.5" fill="none"/><path d="M122 166 L132 166 L132 152" stroke="#5cb8c4" stroke-width="0.7" opacity="0.45" fill="none"/><path d="M96 156 L86 156 L86 146" stroke="#5cb8c4" stroke-width="0.6" opacity="0.4" fill="none"/><circle cx="104" cy="122" r="1.8" fill="#5cb8c4" opacity="0.55"/><circle cx="132" cy="152" r="1.5" fill="#5cb8c4" opacity="0.45"/><circle cx="86" cy="146" r="1.5" fill="#5cb8c4" opacity="0.45"/></g>
+      <g class="vine-leaf" style="transform-origin: 102px 100px"><path d="M102 116 L126 100 L124 78 L100 66 L76 77 L78 100Z" fill="#1a3a5c" opacity="0.3"/><path d="M102 116 L126 100 L124 78 L100 66 L76 77 L78 100Z" stroke="#4ab8e8" stroke-width="0.8" opacity="0.55" fill="none"/><rect x="88" y="80" width="26" height="18" rx="1" stroke="#4ab8e8" stroke-width="0.6" opacity="0.4" fill="none"/><line x1="93" y1="80" x2="93" y2="76" stroke="#4ab8e8" stroke-width="0.6" opacity="0.5"/><line x1="101" y1="80" x2="101" y2="76" stroke="#4ab8e8" stroke-width="0.6" opacity="0.5"/><line x1="109" y1="80" x2="109" y2="76" stroke="#4ab8e8" stroke-width="0.6" opacity="0.5"/><line x1="93" y1="98" x2="93" y2="102" stroke="#4ab8e8" stroke-width="0.6" opacity="0.5"/><line x1="101" y1="98" x2="101" y2="102" stroke="#4ab8e8" stroke-width="0.6" opacity="0.5"/><line x1="109" y1="98" x2="109" y2="102" stroke="#4ab8e8" stroke-width="0.6" opacity="0.5"/><path d="M126 100 L136 100 L136 88 L140 88" stroke="#4ab8e8" stroke-width="0.7" opacity="0.5" fill="none"/><path d="M124 78 L132 70 L132 58" stroke="#4ab8e8" stroke-width="0.7" opacity="0.45" fill="none"/><path d="M78 100 L68 100 L68 86" stroke="#4ab8e8" stroke-width="0.7" opacity="0.45" fill="none"/><circle cx="140" cy="88" r="2" fill="#4ab8e8" opacity="0.6"/><circle cx="132" cy="58" r="2" fill="#4ab8e8" opacity="0.55"/><circle cx="68" cy="86" r="2" fill="#4ab8e8" opacity="0.5"/></g>
+    </svg>
+  </section>
+
+  <!-- WHAT IS BIOMIMICRY -->
+  <section class="what" id="learn">
+    <div class="what-text">
+      <div class="section-label">The philosophy</div>
+      <h2>Design informed<br>by <em>3.8 billion years</em><br>of research</h2>
+      <p>Biomimicry is an approach to innovation that is a return to what works — the nature around us. It seeks sustainable and efficient solutions by emulating nature's time-tested patterns and strategies because 3.8 billion years of evolution means 3.8 billion years of systems and strategies going through iteration after iteration to manage the same operating conditions we're dealing with today. The process and application of applying that wisdom is Biomimicry, but sometimes, we recognize it's best to just use nature itself as a nature-based solution.</p>
+      <p>Whatever challenge you have, nature has already dealt with it. Don't think so? Let's ask nature.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">3.8B</div><div class="stat-desc">Years of evolution as R&D</div></div>
+        <div class="stat"><div class="stat-num">96%</div><div class="stat-desc">Of species yet unstudied</div></div>
+        <div class="stat"><div class="stat-num">∞</div><div class="stat-desc">Models to learn from</div></div>
+      </div>
+    </div>
+    <div class="what-visual">
+      <div class="ring ring-1"><div class="ring-dot"></div></div>
+      <div class="ring ring-2"><div class="ring-dot"></div></div>
+      <div class="ring ring-3"><div class="ring-dot"></div></div>
+      <div class="what-center-icon">
+        <svg width="68" height="68" viewBox="0 0 80 80" fill="none">
+          <path d="M42 12 C26 18 16 33 18 51 C20 63 31 71 40 73 C49 70 60 61 61 48 C63 30 54 18 42 12Z" fill="#8a9e6e" opacity="0.75"/>
+          <path d="M42 12 C41 35 40 55 40 73" stroke="#4a3520" stroke-width="1.2" stroke-linecap="round" opacity="0.45"/>
+          <path d="M41 28 C35 30 28 35 26 42" stroke="#4a3520" stroke-width="0.8" stroke-linecap="round" opacity="0.35"/>
+          <path d="M40 42 C33 44 27 48 25 54" stroke="#4a3520" stroke-width="0.8" stroke-linecap="round" opacity="0.35"/>
+          <path d="M40 56 C35 57 31 60 30 65" stroke="#4a3520" stroke-width="0.8" stroke-linecap="round" opacity="0.35"/>
+          <path d="M41 28 C47 29 53 33 55 40" stroke="#4a3520" stroke-width="0.8" stroke-linecap="round" opacity="0.35"/>
+          <path d="M40 42 C47 43 53 47 55 53" stroke="#4a3520" stroke-width="0.8" stroke-linecap="round" opacity="0.35"/>
+          <path d="M40 56 C45 57 49 60 50 65" stroke="#4a3520" stroke-width="0.8" stroke-linecap="round" opacity="0.35"/>
+          <path d="M40 73 C40 76 39 78 38 80" stroke="#4a3520" stroke-width="1.2" stroke-linecap="round" opacity="0.5"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="process-header">
+      <div class="section-label">How it works</div>
+      <h2>A nature-inspired<br><em>learning process</em></h2>
+    </div>
+    <div class="process-flow">
+      <div class="step"><div class="step-num">01</div><h4>Reframe</h4><p>We begin with curiosity. Problems are reframed and asked as, "How does nature ____".</p></div>
+      <div class="process-connector-line"></div>
+      <div class="step"><div class="step-num">02</div><h4>Canvas</h4><p>Dive into nature. What organisms, strategies, or functions solve for our operating condition?</p></div>
+      <div class="process-connector-line"></div>
+      <div class="process-fork">
+        <div class="fork-row"><div class="fork-tick"></div><div class="step"><div class="step-path-label">Biomimicry</div><div class="step-num">03</div><h4>Abstract</h4><p>Find what works and translate it into principles that can be applied across contexts.</p></div></div>
+        <div class="fork-row"><div class="fork-tick"></div><div class="step"><div class="step-path-label">Nature-based solutions</div><div class="step-num">03</div><h4>Utilize</h4><p>Deploy nature directly. Work with organisms, ecosystems, or natural processes as the solution itself.</p></div></div>
+      </div>
+      <div class="process-connector-line"></div>
+      <div class="step"><div class="step-num">04</div><h4>Apply</h4><p>Bring these strategies into your specific domain. From nature to your design table.</p></div>
+      <div class="process-connector-line"></div>
+      <div class="step"><div class="step-num">05</div><h4>Evaluate</h4><p>How does this solution measure up against the conditions of life? Reflect, refine, evolve.</p></div>
+    </div>
+  </section>
+
+  <!-- OFFERINGS -->
+  <section class="offerings" id="offerings">
+    <div class="offerings-header">
+      <div class="section-label">Explore together</div>
+      <h2>What we<br><em>offer</em></h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="24" cy="24" r="18"/><path d="M24 6 C24 6 14 16 14 24 C14 32 24 42 24 42"/><path d="M24 6 C24 6 34 16 34 24 C34 32 24 42 24 42"/><line x1="6" y1="24" x2="42" y2="24"/></svg>
+        <h3>Consultation</h3>
+        <p>Looking to benefit from the largest R&D department of all time? Whatever you are looking to solve for, nature has a solution. Whether it's a system scale, specific design challenge, or something more abstract, let's look to nature and provide fresh perspectives.</p>
+        <a href="#contact" class="card-link">Tell me what you're working on →</a>
+      </div>
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="10" width="36" height="28" rx="2"/><path d="M16 10 L16 6 M32 10 L32 6"/><path d="M14 22 L22 22 M14 28 L34 28 M14 34 L28 34"/><circle cx="34" cy="20" r="4"/></svg>
+        <h3>Workshops</h3>
+        <p>Want to learn more about biomimicry, and get more from nature? With half-day, full-day, or multi-session experiences, we have lesson plans designed to cultivate biomimetic thinking across teams, organizations, schools, and communities.</p>
+        <a href="#contact" class="card-link">Inquire about workshops →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PULL QUOTE -->
+  <section class="quote-section">
+    <blockquote>"The more our world functions like the natural world, the more likely we are to endure on this home that is ours, but not ours alone."</blockquote>
+    <div class="quote-attr">— Janine Benyus, Biomimicry: Innovation Inspired by Nature</div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-info">
+      <div class="section-label">Get in touch</div>
+      <h2>Ready to learn<br><em>from nature?</em></h2>
+      <p>Whether you're curious about biomimicry for the first time, looking to solve a specific problem, or are ready to look at things from a new perspective, we'd love to hear from you.</p>
+      <p>We work with designers, architects, engineers, educators, entrepreneurs, and anyone looking to draw from nature's wisdom. All inquiries welcome.</p>
+      <div class="contact-detail">
+        <div class="contact-detail-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Available worldwide, based in San Francisco, California
+        </div>
+        <div class="contact-detail-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          hello@yourdomain.com
+        </div>
+      </div>
+    </div>
+    <div class="form">
+      <div class="form-row">
+        <div class="field"><label>First name</label><input type="text" placeholder="Alexander" /></div>
+        <div class="field"><label>Last name</label><input type="text" placeholder="Humboldt" /></div>
+      </div>
+      <div class="field"><label>Email</label><input type="email" placeholder="alexander@example.com" /></div>
+      <div class="field"><label>I'm interested in</label><select><option value="">Select an option…</option><option>Consultation</option><option>Workshop</option><option>Just learning more</option><option>Something else</option></select></div>
+      <div class="field"><label>Tell me more</label><textarea placeholder="Share a bit about what you're working on, your background, or what draws you to biomimicry…"></textarea></div>
+      <button class="form-submit">Send message</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="biomimicry.html" class="footer-logo"><span style="color:#5c7a2e">Base Pair</span> <span style="font-size:0.5em">to</span> <span style="color:#3a8a82">Blueprint</span></a>
+    <ul class="footer-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="work.html">Work together</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div>© 2026 — All rights reserved</div>
+  </footer>
+
+  <!-- CONTACT MODAL -->
+  <div id="contact-modal" style="display:none;position:fixed;inset:0;z-index:500;align-items:center;justify-content:center;padding:1.5rem;">
+    <div id="modal-backdrop" style="position:absolute;inset:0;background:rgba(44,31,14,0.55);backdrop-filter:blur(4px);"></div>
+    <div style="position:relative;background:var(--cream);border-radius:3px;padding:3rem;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 30px 80px rgba(44,31,14,0.2);">
+      <button id="modal-close" style="position:absolute;top:1.2rem;right:1.2rem;background:none;border:none;cursor:pointer;color:var(--sage);font-size:1.4rem;line-height:1;padding:0.2rem 0.5rem;transition:color 0.2s;" aria-label="Close">&#x2715;</button>
+      <div id="modal-form-view">
+        <div style="font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);margin-bottom:0.8rem;">Get in touch</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--bark);margin-bottom:1.8rem;line-height:1.2;">Ready to learn <em style="color:var(--moss)">from nature?</em></h2>
+        <form id="contact-form" class="form">
+          <div class="form-row">
+            <div class="field"><label for="modal-first">First name</label><input id="modal-first" type="text" placeholder="Alexander" required /></div>
+            <div class="field"><label for="modal-last">Last name</label><input id="modal-last" type="text" placeholder="Humboldt" required /></div>
+          </div>
+          <div class="field"><label for="modal-email">Email</label><input id="modal-email" type="email" placeholder="alexander@example.com" required /></div>
+          <div class="field"><label for="modal-interest">I'm interested in</label>
+            <select id="modal-interest"><option value="">Select an option…</option><option>Consultation</option><option>Workshop</option><option>Just learning more</option><option>Something else</option></select>
+          </div>
+          <div class="field"><label for="modal-message">Tell me more</label><textarea id="modal-message" placeholder="Share a bit about what you're working on, your background, or what draws you to biomimicry…"></textarea></div>
+          <button type="submit" class="form-submit">Send message</button>
+        </form>
+      </div>
+      <div id="modal-thankyou-view" style="display:none;text-align:center;padding:2rem 0;">
+        <div style="font-size:2rem;margin-bottom:1.2rem;">🌿</div>
+        <div style="font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);margin-bottom:0.8rem;">Message received</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:300;color:var(--bark);margin-bottom:1rem;line-height:1.2;">Thank you for <em style="color:var(--moss)">reaching out</em></h2>
+        <p style="font-size:0.95rem;line-height:1.7;color:var(--soil);opacity:0.75;max-width:36ch;margin:0 auto 2rem;">We'll be in touch soon. In the meantime, nature is doing something remarkable right outside your window.</p>
+        <button onclick="document.getElementById('contact-modal').style.display='none';document.body.style.overflow='';" class="form-submit">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="modal.js"></script>
+  <script>
+    /* Measure each vine path's true length so the grow animation is exact */
+    document.querySelectorAll('.vine-path').forEach(path => {
+      const len = path.getTotalLength();
+      path.style.strokeDasharray = len;
+      path.style.strokeDashoffset = len;
+    });
+  </script>
+
+</body>
+</html>

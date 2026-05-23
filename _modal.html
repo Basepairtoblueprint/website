@@ -1,0 +1,93 @@
+<!--
+  _modal.html — Contact Modal
+  Paste this block just before </body> on every page.
+  Requires: global.css loaded, modal.js loaded after this block.
+-->
+
+<div id="contact-modal" style="
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+">
+  <div id="modal-backdrop" style="
+    position: absolute;
+    inset: 0;
+    background: rgba(44, 31, 14, 0.55);
+    backdrop-filter: blur(4px);
+  "></div>
+
+  <div style="
+    position: relative;
+    background: var(--cream);
+    border-radius: 3px;
+    padding: 3rem;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 30px 80px rgba(44,31,14,0.2);
+  ">
+    <button id="modal-close" style="
+      position: absolute;
+      top: 1.2rem; right: 1.2rem;
+      background: none; border: none;
+      cursor: pointer; color: var(--sage);
+      font-size: 1.4rem; line-height: 1;
+      padding: 0.2rem 0.5rem;
+      transition: color 0.2s;
+    " aria-label="Close">&#x2715;</button>
+
+    <!-- FORM VIEW -->
+    <div id="modal-form-view">
+      <div style="font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--sage); margin-bottom:0.8rem;">Get in touch</div>
+      <h2 style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:var(--bark); margin-bottom:1.8rem; line-height:1.2;">Ready to learn <em style="color:var(--moss)">from nature?</em></h2>
+
+      <form id="contact-form" class="form">
+        <div class="form-row">
+          <div class="field">
+            <label for="modal-first">First name</label>
+            <input id="modal-first" type="text" placeholder="Alexander" required />
+          </div>
+          <div class="field">
+            <label for="modal-last">Last name</label>
+            <input id="modal-last" type="text" placeholder="Humboldt" required />
+          </div>
+        </div>
+        <div class="field">
+          <label for="modal-email">Email</label>
+          <input id="modal-email" type="email" placeholder="alexander@example.com" required />
+        </div>
+        <div class="field">
+          <label for="modal-interest">I'm interested in</label>
+          <select id="modal-interest">
+            <option value="">Select an option…</option>
+            <option>Consultation</option>
+            <option>Workshop</option>
+            <option>Just learning more</option>
+            <option>Something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="modal-message">Tell me more</label>
+          <textarea id="modal-message" placeholder="Share a bit about what you're working on, your background, or what draws you to biomimicry…"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send message</button>
+      </form>
+    </div>
+
+    <!-- THANK YOU VIEW -->
+    <div id="modal-thankyou-view" style="display:none; text-align:center; padding: 2rem 0;">
+      <div style="font-size:2rem; margin-bottom:1.2rem;">🌿</div>
+      <div style="font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--sage); margin-bottom:0.8rem;">Message received</div>
+      <h2 style="font-family:'Cormorant Garamond',serif; font-size:1.8rem; font-weight:300; color:var(--bark); margin-bottom:1rem; line-height:1.2;">Thank you for <em style="color:var(--moss)">reaching out</em></h2>
+      <p style="font-size:0.95rem; line-height:1.7; color:var(--soil); opacity:0.75; max-width:36ch; margin:0 auto 2rem;">We'll be in touch soon. In the meantime, nature is doing something remarkable right outside your window.</p>
+      <button onclick="document.getElementById('contact-modal').style.display='none'; document.body.style.overflow='';" class="form-submit">Close</button>
+    </div>
+  </div>
+</div>
+
+<script src="modal.js"></script>
