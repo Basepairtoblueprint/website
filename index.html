@@ -480,9 +480,24 @@
         </div>
       </div>
     </div>
-    <div style="display:flex; align-items:center; justify-content:center;">
-      <a href="#contact" class="btn-primary">Send a message</a>
-    </div>
+    <form class="form" id="inline-contact-form">
+      <div class="form-row">
+        <div class="field"><label for="inline-first">First name</label><input id="inline-first" type="text" placeholder="Alexander" required /></div>
+        <div class="field"><label for="inline-last">Last name</label><input id="inline-last" type="text" placeholder="Humboldt" required /></div>
+      </div>
+      <div class="field"><label for="inline-email">Email</label><input id="inline-email" type="email" placeholder="alexander@example.com" required /></div>
+      <div class="field"><label for="inline-interest">I'm interested in</label>
+        <select id="inline-interest"><option value="">Select an option…</option><option>Consultation</option><option>Workshop</option><option>Just learning more</option><option>Something else</option></select>
+      </div>
+      <div class="field"><label for="inline-message">Tell me more</label><textarea id="inline-message" placeholder="Share a bit about what you're working on, your background, or what draws you to biomimicry…"></textarea></div>
+      <div id="inline-error-msg" style="display:none;color:#8b4a2f;font-size:0.85rem;padding:0.75rem 1rem;background:rgba(139,74,47,0.08);border:1px solid rgba(139,74,47,0.2);border-radius:2px;"></div>
+      <div id="inline-thankyou" style="display:none;">
+        <div style="font-size:1.5rem;margin-bottom:0.8rem;">🌿</div>
+        <div style="font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--sage);margin-bottom:0.5rem;">Message received</div>
+        <p style="font-size:0.95rem;line-height:1.7;color:var(--soil);opacity:0.75;">We'll be in touch soon. In the meantime, nature is doing something remarkable right outside your window.</p>
+      </div>
+      <button type="submit" class="form-submit">Send message</button>
+    </form>
   </section>
 
   <!-- FOOTER -->
@@ -573,6 +588,53 @@
           links.classList.remove('open');
           document.body.style.overflow = '';
         });
+      });
+    })();
+  </script>
+  <script>
+    /* Inline contact form — Formspree */
+    (function() {
+      var form = document.getElementById('inline-contact-form');
+      if (!form) return;
+      form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        var btn = form.querySelector('.form-submit');
+        var errorMsg = document.getElementById('inline-error-msg');
+        var thankyou = document.getElementById('inline-thankyou');
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+        errorMsg.style.display = 'none';
+        var data = {
+          firstName: document.getElementById('inline-first').value,
+          lastName:  document.getElementById('inline-last').value,
+          email:     document.getElementById('inline-email').value,
+          interest:  document.getElementById('inline-interest').value,
+          message:   document.getElementById('inline-message').value,
+        };
+        try {
+          var res = await fetch('https://formspree.io/f/xojbwggr', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          if (res.ok) {
+            form.querySelectorAll('.field, .form-row').forEach(function(el) { el.style.display = 'none'; });
+            btn.style.display = 'none';
+            thankyou.style.display = 'block';
+          } else {
+            var json = await res.json();
+            var msg = (json.errors && json.errors.map(function(e) { return e.message; }).join(', ')) || 'Something went wrong. Please try again.';
+            errorMsg.textContent = msg;
+            errorMsg.style.display = 'block';
+            btn.textContent = 'Send message';
+            btn.disabled = false;
+          }
+        } catch(_) {
+          errorMsg.textContent = 'Network error. Please check your connection and try again.';
+          errorMsg.style.display = 'block';
+          btn.textContent = 'Send message';
+          btn.disabled = false;
+        }
       });
     })();
   </script>
