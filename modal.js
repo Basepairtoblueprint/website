@@ -1,7 +1,6 @@
 /* ============================================================
    modal.js — Base Pair to Blueprint
    Contact modal logic shared across all pages.
-   Replace FORMSPREE_URL with your actual endpoint when ready.
    ============================================================ */
 
 (function () {
@@ -15,8 +14,9 @@
     e.preventDefault();
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
-    document.getElementById('modal-form-view').style.display    = 'block';
+    document.getElementById('modal-form-view').style.display     = 'block';
     document.getElementById('modal-thankyou-view').style.display = 'none';
+    document.getElementById('modal-error-msg').style.display     = 'none';
   }
 
   function closeModal() {
@@ -36,8 +36,11 @@
     e.preventDefault();
 
     const submitBtn = form.querySelector('.form-submit');
+    const errorMsg  = document.getElementById('modal-error-msg');
+
     submitBtn.textContent = 'Sending…';
-    submitBtn.disabled = true;
+    submitBtn.disabled    = true;
+    errorMsg.style.display = 'none';
 
     const data = {
       firstName: form.querySelector('#modal-first').value,
@@ -49,18 +52,26 @@
 
     try {
       const res = await fetch(FORMSPREE_URL, {
-        method: 'POST',
+        method:  'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data),
+        body:    JSON.stringify(data),
       });
-      if (!res.ok) throw new Error('Server error');
+
+      if (res.ok) {
+        document.getElementById('modal-form-view').style.display     = 'none';
+        document.getElementById('modal-thankyou-view').style.display = 'block';
+      } else {
+        const json = await res.json();
+        const msg  = (json.errors && json.errors.map(err => err.message).join(', ')) || 'Something went wrong. Please try again.';
+        errorMsg.textContent   = msg;
+        errorMsg.style.display = 'block';
+      }
     } catch (_) {
-      // Formspree not set up yet — show thank-you anyway
+      errorMsg.textContent   = 'Network error. Please check your connection and try again.';
+      errorMsg.style.display = 'block';
     } finally {
-      document.getElementById('modal-form-view').style.display    = 'none';
-      document.getElementById('modal-thankyou-view').style.display = 'block';
       submitBtn.textContent = 'Send message';
-      submitBtn.disabled = false;
+      submitBtn.disabled    = false;
     }
   });
 })();
