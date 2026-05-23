@@ -207,6 +207,7 @@
     .fork-tick { width: 1.5rem; height: 1px; background: rgba(138,158,110,0.3); flex-shrink: 0; }
     .step-path-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--sage); opacity: 0.7; margin-bottom: 0.4rem; }
     .step { padding: 0 1.2rem; position: relative; min-width: 120px; }
+    .process-dots { display: none; }
     .step-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300; color: var(--moss); opacity: 0.5; line-height: 1; margin-bottom: 1.2rem; }
     .step h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; color: var(--lichen); margin-bottom: 0.7rem; }
     .step p { font-size: 0.88rem; line-height: 1.65; color: rgba(184,196,160,0.7); }
@@ -242,51 +243,68 @@
       .cards { grid-template-columns: 1fr; }
       .contact { grid-template-columns: 1fr; gap: 3rem; }
 
-      /* Process steps — horizontal scroll on mobile */
+      /* Process steps — full-screen slides on mobile */
       .process { overflow: hidden; }
       .process-scroll-wrapper { position: relative; }
       .process-flow {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        display: flex;
+        overflow-x: scroll;
         scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
         scrollbar-width: none;
         gap: 0;
       }
       .process-flow::-webkit-scrollbar { display: none; }
-      .step {
-        scroll-snap-align: start;
-        min-width: calc(100vw - 4rem);
-        flex-shrink: 0;
-        padding: 0 0.5rem;
-      }
-      .process-fork {
-        scroll-snap-align: start;
-        min-width: calc(100vw - 4rem);
-        flex-shrink: 0;
-      }
-      .process-fork .step { min-width: unset; padding: 0; }
+
+      /* Hide connectors — not meaningful in slide view */
       .process-connector-line { display: none; }
       .fork-tick { display: none; }
 
-      /* Dots */
+      /* Each slide takes exactly the full section width */
+      .step {
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        flex: 0 0 100%;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 2rem;
+      }
+      .process-fork {
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        flex: 0 0 100%;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .process-fork .step {
+        flex: none;
+        width: 100%;
+        padding: 0;
+      }
+
+      /* Dots — position indicator only */
       .process-dots {
         display: flex;
         justify-content: center;
-        gap: 0.5rem;
-        margin-top: 1.8rem;
+        gap: 0.6rem;
+        margin-top: 2rem;
+        pointer-events: none;
       }
       .process-dot {
-        width: 7px; height: 7px;
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
-        border: none;
-        background: rgba(138,158,110,0.3);
-        cursor: pointer;
-        padding: 0;
+        background: rgba(184,196,160,0.3);
         transition: background 0.25s, transform 0.25s;
+        pointer-events: none;
       }
       .process-dot.active {
         background: var(--sage);
-        transform: scale(1.3);
+        transform: scale(1.4);
       }
     }
   </style>
@@ -511,37 +529,23 @@
 
   <script src="modal.js"></script>
   <script>
-    /* Process dots sync */
+    /* Process dots — position indicator only */
     (function() {
       var flow = document.getElementById('process-flow');
       var dots = document.querySelectorAll('.process-dot');
       if (!flow || !dots.length) return;
 
-      var scrollItems = Array.from(flow.children).filter(function(el) {
+      var slides = Array.from(flow.children).filter(function(el) {
         return el.classList.contains('step') || el.classList.contains('process-fork');
       });
 
       function updateDots() {
-        var scrollLeft = flow.scrollLeft;
-        var width = flow.offsetWidth;
-        var closest = 0;
-        var minDist = Infinity;
-        scrollItems.forEach(function(el, i) {
-          var dist = Math.abs(el.offsetLeft - scrollLeft);
-          if (dist < minDist) { minDist = dist; closest = i; }
-        });
-        dots.forEach(function(d, i) { d.classList.toggle('active', i === closest); });
+        var index = Math.round(flow.scrollLeft / flow.offsetWidth);
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === index); });
       }
 
       flow.addEventListener('scroll', updateDots, { passive: true });
-
-      dots.forEach(function(dot, i) {
-        dot.addEventListener('click', function() {
-          if (scrollItems[i]) {
-            flow.scrollTo({ left: scrollItems[i].offsetLeft, behavior: 'smooth' });
-          }
-        });
-      });
+      updateDots();
     })();
   </script>
   <script>
