@@ -4,6 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Work Together — Biomimicry</title>
+
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Work Together — Base Pair to Blueprint" />
+  <meta property="og:description" content="Nature has been solving complex problems for 3.8 billion years. We help you learn from the best." />
+  <meta property="og:url"         content="https://basepairtoblueprint.com/work.html" />
+  <meta property="og:site_name"   content="Base Pair to Blueprint" />
+  <!-- Small image first: WhatsApp, iMessage, and compact previewers use the first og:image -->
+  <meta property="og:image"        content="https://basepairtoblueprint.com/OG_image_small.png" />
+  <meta property="og:image:width"  content="600" />
+  <meta property="og:image:height" content="600" />
+  <!-- Large image second: LinkedIn, Slack, Facebook prefer the largest image when multiple are present -->
+  <meta property="og:image"        content="https://basepairtoblueprint.com/OG_image.png" />
+  <meta property="og:image:width"  content="1800" />
+  <meta property="og:image:height" content="945" />
+
+  <!-- Twitter / X Card — always renders large, so point directly to the large image -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Work Together — Base Pair to Blueprint" />
+  <meta name="twitter:description" content="Nature has been solving complex problems for 3.8 billion years. We help you learn from the best." />
+  <meta name="twitter:image"       content="https://basepairtoblueprint.com/OG_image.png" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="global.css" />
   <style>
@@ -99,6 +120,55 @@
     }
     /* Push hero down to clear both nav + subnav */
     .page-hero { padding-top: 14rem; }
+    @media (max-width: 900px) {
+      .page-hero { padding-top: 12rem; }
+    }
+
+    /* ── SUBNAV ── */
+    #subnav {
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      background: rgba(245,240,232,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(92,107,58,0.12);
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 3rem;
+      transition: box-shadow 0.3s;
+    }
+    .subnav-link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bark);
+      text-decoration: none;
+      opacity: 0.6;
+      padding: 1.2rem 2rem 0.5rem;
+      border-bottom: 2px solid transparent;
+      transition: opacity 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .subnav-link:hover { opacity: 1; }
+    .subnav-link.active { opacity: 1; color: var(--moss); border-bottom-color: var(--moss); }
+    @media (max-width: 900px) {
+      #subnav {
+        top: 62px;
+        justify-content: space-between;
+        padding-left: 0;
+        padding-right: 0;
+      }
+      .subnav-link {
+        flex: 1;
+        text-align: center;
+        padding: 1rem 0 0.5rem;
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
+        opacity: 0.75;
+      }
+    }
   </style>
 </head>
 <body>
@@ -115,31 +185,11 @@
   </nav>
 
   <!-- SUBHEADER NAV -->
-  <div id="subnav" style="position:fixed;top:72px;left:0;right:0;z-index:99;background:rgba(245,240,232,0.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(92,107,58,0.12);display:flex;justify-content:flex-end;gap:0;transition:box-shadow 0.3s;padding-right:3rem;">
+  <div id="subnav">
     <a href="#consultation" class="subnav-link">Consultation</a>
     <a href="#workshops" class="subnav-link">Workshops</a>
     <a href="#selected-work" class="subnav-link">Selected Work</a>
   </div>
-  <style>
-    .subnav-link {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--bark);
-      text-decoration: none;
-      opacity: 0.6;
-      padding: 0.85rem 2rem;
-      border-bottom: 2px solid transparent;
-      transition: opacity 0.2s, border-color 0.2s, color 0.2s;
-    }
-    .subnav-link:hover { opacity: 1; }
-    .subnav-link.active { opacity: 1; color: var(--moss); border-bottom-color: var(--moss); }
-    @media (max-width: 600px) {
-      #subnav { top: 62px; }
-      .subnav-link { padding: 0.75rem 1.1rem; font-size: 0.68rem; }
-    }
-  </style>
   <script>
     (function() {
       var links = document.querySelectorAll('.subnav-link');
@@ -325,9 +375,9 @@
       var label = document.getElementById('share-btn-label');
       btn.addEventListener('click', async function() {
         var shareData = {
-          title: 'Base Pair to Blueprint',
+          title: 'Work Together — Base Pair to Blueprint',
           text: 'Nature has been solving complex problems for 3.8 billion years. We help you learn from the best.',
-          url: 'https://basepairtoblueprint.com/'
+          url: 'https://basepairtoblueprint.com/work.html'
         };
         if (navigator.share) {
           try { await navigator.share(shareData); } catch(_) {}

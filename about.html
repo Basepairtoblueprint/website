@@ -4,6 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — Biomimicry</title>
+
+  <!-- Open Graph / Social sharing -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="About — Base Pair to Blueprint" />
+  <meta property="og:description" content="Nature has been solving complex problems for 3.8 billion years. We help you learn from the best." />
+  <meta property="og:url"         content="https://basepairtoblueprint.com/about.html" />
+  <meta property="og:site_name"   content="Base Pair to Blueprint" />
+  <!-- Small image first: WhatsApp, iMessage, and compact previewers use the first og:image -->
+  <meta property="og:image"        content="https://basepairtoblueprint.com/OG_image_small.png" />
+  <meta property="og:image:width"  content="600" />
+  <meta property="og:image:height" content="600" />
+  <!-- Large image second: LinkedIn, Slack, Facebook prefer the largest image when multiple are present -->
+  <meta property="og:image"        content="https://basepairtoblueprint.com/OG_image.png" />
+  <meta property="og:image:width"  content="1800" />
+  <meta property="og:image:height" content="945" />
+
+  <!-- Twitter / X Card — always renders large, so point directly to the large image -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="About — Base Pair to Blueprint" />
+  <meta name="twitter:description" content="Nature has been solving complex problems for 3.8 billion years. We help you learn from the best." />
+  <meta name="twitter:image"       content="https://basepairtoblueprint.com/OG_image.png" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Libre+Baskerville:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="global.css" />
   <style>
@@ -204,9 +225,9 @@
       var label = document.getElementById('share-btn-label');
       btn.addEventListener('click', async function() {
         var shareData = {
-          title: 'Base Pair to Blueprint',
+          title: 'About — Base Pair to Blueprint',
           text: 'Nature has been solving complex problems for 3.8 billion years. We help you learn from the best.',
-          url: 'https://basepairtoblueprint.com/'
+          url: 'https://basepairtoblueprint.com/about.html'
         };
         if (navigator.share) {
           try { await navigator.share(shareData); } catch(_) {}
