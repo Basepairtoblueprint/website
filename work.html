@@ -147,12 +147,22 @@
       color: var(--bark);
       text-decoration: none;
       opacity: 0.6;
-      padding: 1.2rem 2rem 0.5rem;
+      padding: 0.6rem 2rem 0.4rem;
       border-bottom: 2px solid transparent;
       transition: opacity 0.2s, border-color 0.2s, color 0.2s;
     }
     .subnav-link:hover { opacity: 1; }
     .subnav-link.active { opacity: 1; color: var(--moss); border-bottom-color: var(--moss); }
+    /* Offset anchor scroll targets so fixed nav+subnav don't cover them */
+    #consultation, #workshops, #selected-work {
+      scroll-margin-top: 105px;
+    }
+    @media (max-width: 900px) {
+      #consultation, #workshops, #selected-work {
+        scroll-margin-top: 140px;
+      }
+    }
+
     @media (max-width: 900px) {
       #subnav {
         top: 110px;
@@ -164,7 +174,7 @@
       .subnav-link {
         flex: 1;
         text-align: center;
-        padding: 1rem 0 0.5rem;
+        padding: 0.6rem 0 0.4rem;
         font-size: 0.65rem;
         letter-spacing: 0.1em;
         opacity: 0.75;
