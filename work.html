@@ -158,6 +158,114 @@
       }
     }
 
+    /* ── ACCORDION ── */
+    .accordion {
+      border: 1px solid rgba(92,107,58,0.15);
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+      position: relative;
+      overflow: hidden;
+      background: inherit;
+    }
+    .accordion::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: #5c6b3a;
+    }
+    .accordion-trigger {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 1.6rem 2.5rem 1.6rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      text-align: left;
+    }
+    .accordion-trigger h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--bark);
+      margin: 0;
+      line-height: 1.25;
+    }
+    .accordion-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      position: relative;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .accordion-icon::before,
+    .accordion-icon::after {
+      content: '';
+      position: absolute;
+      background: var(--moss);
+      border-radius: 1px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .accordion-icon::before { width: 2px; height: 100%; left: 50%; top: 0; transform: translateX(-50%); }
+    .accordion-icon::after  { width: 100%; height: 2px; top: 50%; left: 0; transform: translateY(-50%); }
+    .accordion.open .accordion-icon::before { transform: translateX(-50%) scaleY(0); opacity: 0; }
+    .accordion.open .accordion-icon { opacity: 1; }
+    .accordion-trigger:hover .accordion-icon { opacity: 0.85; }
+
+    .accordion-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.32s ease;
+    }
+    .accordion.open .accordion-body {
+      grid-template-rows: 1fr;
+    }
+    .accordion-body-inner {
+      overflow: hidden;
+    }
+    .accordion-body-inner > * {
+      padding: 0 2.5rem 1.8rem 2.5rem;
+    }
+    .accordion-body p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--bark);
+      opacity: 0.85;
+      margin-bottom: 1rem;
+      max-width: 64ch;
+    }
+    .accordion-body p:last-child { margin-bottom: 0; }
+    .accordion-body .offering-detail-list {
+      list-style: none;
+      margin-top: 0.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .accordion-body .offering-detail-list li {
+      font-size: 0.88rem;
+      color: var(--bark);
+      opacity: 0.8;
+      display: flex;
+      align-items: baseline;
+      gap: 0.7rem;
+    }
+    .accordion-body .offering-detail-list li::before { content: '—'; color: var(--sage); flex-shrink: 0; }
+
+    .project-accordion { margin-bottom: 0; border-radius: 0; border-left: none; border-right: none; border-top: none; border-bottom: 1px solid rgba(92,107,58,0.2); }
+    .project-accordion:first-of-type { border-top: 1px solid rgba(92,107,58,0.2); }
+    .project-accordion::before { display: none; }
+    .project-trigger { padding: 1.8rem 0; align-items: flex-start; }
+    .project-trigger h3 { font-size: 1.2rem; font-weight: 400; font-family: 'Cormorant Garamond', serif; color: var(--bark); margin: 0; line-height: 1.3; }
+    .project-trigger .accordion-icon { margin-top: 0.3rem; }
+    .accordion-body .project-accordion p { color: var(--soil); opacity: 0.82; }
+    .project-accordion .accordion-body-inner > div { padding: 0 0 1.8rem 0; }
+
     @media (max-width: 900px) {
       #subnav {
         top: 110px;
@@ -236,41 +344,87 @@
           <p>We work across two complementary disciplines: biomimicry, which abstracts and emulates nature's strategies in design, and nature-based solutions, which deploy nature itself to solve human challenges directly. Part of our work is understanding which fits your situation, or whether a combination of both is the right answer.</p>
         </div>
         <div class="inner-right">
-          <div class="offering-block">
-            <h3>Champion brief</h3>
-            <p>We provide a focused look at one organism whose strategy applies directly to your challenge. We explain what it does, why it works, and how it can be applied to your problem.</p>
+          <div class="accordion">
+            <button class="accordion-trigger" aria-expanded="false">
+              <h3>Champion brief</h3>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body" role="region">
+              <div class="accordion-body-inner">
+                <div><p>We provide a focused look at one organism whose strategy applies directly to your challenge. We explain what it does, why it works, and how it can be applied to your problem.</p></div>
+              </div>
+            </div>
           </div>
-          <div class="offering-block">
-            <h3>Research report</h3>
-            <p>A full survey of nature's approaches to your challenge. Canvasing a range of organisms, honing in on champion species, and translating their strategies into clear abstracted principles and actionable solutions.</p>
+          <div class="accordion">
+            <button class="accordion-trigger" aria-expanded="false">
+              <h3>Research report</h3>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body" role="region">
+              <div class="accordion-body-inner">
+                <div><p>A full survey of nature's approaches to your challenge. Canvasing a range of organisms, honing in on champion species, and translating their strategies into clear abstracted principles and actionable solutions.</p></div>
+              </div>
+            </div>
           </div>
-          <div class="offering-block">
-            <h3>Working session</h3>
-            <p>A focused consulting call where we dig into your specific problem together. The output is a problem statement reframed through a biological lens, and a clear direction for where to look next.</p>
+          <div class="accordion">
+            <button class="accordion-trigger" aria-expanded="false">
+              <h3>Working session</h3>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body" role="region">
+              <div class="accordion-body-inner">
+                <div><p>A focused consulting call where we dig into your specific problem together. The output is a problem statement reframed through a biological lens, and a clear direction for where to look next.</p></div>
+              </div>
+            </div>
           </div>
-          <div class="offering-block">
-            <h3>Extended engagement</h3>
-            <p>A symbiotic relationship where we work alongside you over time. Whether that is on-site or on-call to provide a nature-informed perspective.</p>
+          <div class="accordion">
+            <button class="accordion-trigger" aria-expanded="false">
+              <h3>Extended engagement</h3>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body" role="region">
+              <div class="accordion-body-inner">
+                <div><p>A symbiotic relationship where we work alongside you over time. Whether that is on-site or on-call to provide a nature-informed perspective.</p></div>
+              </div>
+            </div>
           </div>
-          <div class="offering-block">
-            <h3>What we work on</h3>
-            <ul class="offering-detail-list">
-              <li>Product and material design informed by biological structures and processes</li>
-              <li>Systems design — organizational, urban, agricultural, technological</li>
-              <li>Sustainability strategy framed through nature's principles of efficiency and resilience</li>
-              <li>Algorithm and process design inspired by natural feedback and adaptation mechanisms</li>
-              <li>Early-stage research and feasibility — translating biological strategies into testable concepts</li>
-              <li>Nature-based solutions — identifying where natural systems can be deployed directly to address environmental, design, and organizational challenges</li>
-            </ul>
+          <div class="accordion">
+            <button class="accordion-trigger" aria-expanded="false">
+              <h3>What we work on</h3>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body" role="region">
+              <div class="accordion-body-inner">
+                <div>
+                  <ul class="offering-detail-list">
+                    <li>Product and material design informed by biological structures and processes</li>
+                    <li>Systems design — organizational, urban, agricultural, technological</li>
+                    <li>Sustainability strategy framed through nature's principles of efficiency and resilience</li>
+                    <li>Algorithm and process design inspired by natural feedback and adaptation mechanisms</li>
+                    <li>Early-stage research and feasibility — translating biological strategies into testable concepts</li>
+                    <li>Nature-based solutions — identifying where natural systems can be deployed directly to address environmental, design, and organizational challenges</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="offering-block">
-            <h3>Who it's for</h3>
-            <ul class="offering-detail-list">
-              <li>Designers, architects, and engineers looking for a new source of solutions</li>
-              <li>Entrepreneurs and product teams at the problem-definition stage</li>
-              <li>Organizations developing sustainability frameworks or circular economy strategies</li>
-              <li>Researchers wanting to translate biological insight into applied design</li>
-            </ul>
+          <div class="accordion">
+            <button class="accordion-trigger" aria-expanded="false">
+              <h3>Who it's for</h3>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body" role="region">
+              <div class="accordion-body-inner">
+                <div>
+                  <ul class="offering-detail-list">
+                    <li>Designers, architects, and engineers looking for a new source of solutions</li>
+                    <li>Entrepreneurs and product teams at the problem-definition stage</li>
+                    <li>Organizations developing sustainability frameworks or circular economy strategies</li>
+                    <li>Researchers wanting to translate biological insight into applied design</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -286,30 +440,67 @@
           <p>We offer half-day, full-day, and multi-session formats, adaptable to the group and context — whether that is a corporate team, a university class, a design studio, or a community organization.</p>
         </div>
         <div class="inner-right">
-          <div class="offering-block">
-            <h3>Half-day introduction</h3>
-            <p>An introduction to biomimicry principles and the step-by-step process, with real-world examples showing how each step works in practice.</p>
+          <div class="accordion">
+            <button class="accordion-trigger" aria-expanded="false">
+              <h3>Half-day introduction</h3>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body" role="region">
+              <div class="accordion-body-inner">
+                <div><p>An introduction to biomimicry principles and the step-by-step process, with real-world examples showing how each step works in practice.</p></div>
+              </div>
+            </div>
           </div>
-          <div class="offering-block">
-            <h3>Full-day</h3>
-            <p>Extended problem-framing, biological research, and concept translation. We can work through a real challenge your team or organization is facing, from first principles to nature-informed solutions.</p>
+          <div class="accordion">
+            <button class="accordion-trigger" aria-expanded="false">
+              <h3>Full-day</h3>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body" role="region">
+              <div class="accordion-body-inner">
+                <div><p>Extended problem-framing, biological research, and concept translation. We can work through a real challenge your team or organization is facing, from first principles to nature-informed solutions.</p></div>
+              </div>
+            </div>
           </div>
-          <div class="offering-block">
-            <h3>Multi-session series</h3>
-            <p>Sustained biomimicry integration for teams or educational programs, building the capacity to apply the process independently over time.</p>
+          <div class="accordion">
+            <button class="accordion-trigger" aria-expanded="false">
+              <h3>Multi-session series</h3>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body" role="region">
+              <div class="accordion-body-inner">
+                <div><p>Sustained biomimicry integration for teams or educational programs, building the capacity to apply the process independently over time.</p></div>
+              </div>
+            </div>
           </div>
-          <div class="offering-block">
-            <h3>Custom formats</h3>
-            <p>Tailored sessions for schools, universities, accelerators, and conferences.</p>
+          <div class="accordion">
+            <button class="accordion-trigger" aria-expanded="false">
+              <h3>Custom formats</h3>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body" role="region">
+              <div class="accordion-body-inner">
+                <div><p>Tailored sessions for schools, universities, accelerators, and conferences.</p></div>
+              </div>
+            </div>
           </div>
-          <div class="offering-block">
-            <h3>Who it's for</h3>
-            <ul class="offering-detail-list">
-              <li>Corporate teams seeking new approaches to innovation or sustainability</li>
-              <li>Schools and universities integrating nature-based thinking into curricula</li>
-              <li>Design studios and creative agencies wanting to expand their methodology</li>
-              <li>Communities and non-profits working on local environmental or design challenges</li>
-            </ul>
+          <div class="accordion">
+            <button class="accordion-trigger" aria-expanded="false">
+              <h3>Who it's for</h3>
+              <span class="accordion-icon" aria-hidden="true"></span>
+            </button>
+            <div class="accordion-body" role="region">
+              <div class="accordion-body-inner">
+                <div>
+                  <ul class="offering-detail-list">
+                    <li>Corporate teams seeking new approaches to innovation or sustainability</li>
+                    <li>Schools and universities integrating nature-based thinking into curricula</li>
+                    <li>Design studios and creative agencies wanting to expand their methodology</li>
+                    <li>Communities and non-profits working on local environmental or design challenges</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -322,28 +513,64 @@
         <h2>Nature-inspired <em>projects</em></h2>
         <p>A small sampling of past projects, each applying the full biomimicry process to a real-world challenge.</p>
 
-        <div class="project">
-          <div class="project-label">Filtration</div>
-          <h3>Manta ray ricochet filtration for microplastic removal</h3>
-          <p>Synthetic clothing is one of the primary sources of microplastic pollution, shedding fibers with every wash cycle that pass straight through conventional filters. Manta rays solve an analogous problem elegantly: their cephalic fins use a ricochet filtration mechanism that separates particles from water without clogging. This project translated that mechanism into a filtration system for pipes, designed to capture microplastics at source before they enter waterways.</p>
+        <div class="accordion project-accordion">
+          <button class="accordion-trigger project-trigger" aria-expanded="false">
+            <div>
+              <div class="project-label">Filtration</div>
+              <h3>Manta ray ricochet filtration for microplastic removal</h3>
+            </div>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-body" role="region">
+            <div class="accordion-body-inner">
+              <div><p>Synthetic clothing is one of the primary sources of microplastic pollution, shedding fibers with every wash cycle that pass straight through conventional filters. Manta rays solve an analogous problem elegantly: their cephalic fins use a ricochet filtration mechanism that separates particles from water without clogging. This project translated that mechanism into a filtration system for pipes, designed to capture microplastics at source before they enter waterways.</p></div>
+            </div>
+          </div>
         </div>
 
-        <div class="project">
-          <div class="project-label">Materials</div>
-          <h3>Morpho butterfly and panther chameleon-inspired thermal protection for ABS plastic</h3>
-          <p>ABS plastic degrades under thermal load. A significant problem for outdoor applications where heat accelerates degradation and raises safety concerns. The morpho butterfly and the panther chameleon both manage color and heat through structural means. The morpho through nanoscale iridescent structures that reflect rather than absorb light, and the chameleon through iridophore crystal layers that actively reflect infrared radiation. This project explored how nanolithography could replicate the morpho's nanostructure on the surface of ABS, while a secondary layer of iridophore-inspired crystals mixed into the plastic itself provides redundancy and resilience - ensuring infrared reflection even as the surface weathers over time. Together, the two strategies could reduce infrared thermal load by up to 50%, keeping surfaces cooler, safer, and significantly longer-lasting.</p>
+        <div class="accordion project-accordion">
+          <button class="accordion-trigger project-trigger" aria-expanded="false">
+            <div>
+              <div class="project-label">Materials</div>
+              <h3>Morpho butterfly and panther chameleon-inspired thermal protection for ABS plastic</h3>
+            </div>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-body" role="region">
+            <div class="accordion-body-inner">
+              <div><p>ABS plastic degrades under thermal load. A significant problem for outdoor applications where heat accelerates degradation and raises safety concerns. The morpho butterfly and the panther chameleon both manage color and heat through structural means. The morpho through nanoscale iridescent structures that reflect rather than absorb light, and the chameleon through iridophore crystal layers that actively reflect infrared radiation. This project explored how nanolithography could replicate the morpho's nanostructure on the surface of ABS, while a secondary layer of iridophore-inspired crystals mixed into the plastic itself provides redundancy and resilience - ensuring infrared reflection even as the surface weathers over time. Together, the two strategies could reduce infrared thermal load by up to 50%, keeping surfaces cooler, safer, and significantly longer-lasting.</p></div>
+            </div>
+          </div>
         </div>
 
-        <div class="project">
-          <div class="project-label">Algorithms</div>
-          <h3>Nature-inspired algorithms for diverse social media content delivery</h3>
-          <p>Social media recommendation algorithms optimize for engagement, which in practice means reinforcing existing preferences and accelerating the formation of echo chambers. Nature does the opposite: ecosystems maintain health through diversity, balance, and feedback loops that prevent any single element from dominating. This project explored which organisms and natural processes — from light gaps in forests to the immune system in bats — could inform the design of content algorithms that actively support diverse viewpoints and reduce the polarizing effects of conventional recommendation systems.</p>
+        <div class="accordion project-accordion">
+          <button class="accordion-trigger project-trigger" aria-expanded="false">
+            <div>
+              <div class="project-label">Algorithms</div>
+              <h3>Nature-inspired algorithms for diverse social media content delivery</h3>
+            </div>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-body" role="region">
+            <div class="accordion-body-inner">
+              <div><p>Social media recommendation algorithms optimize for engagement, which in practice means reinforcing existing preferences and accelerating the formation of echo chambers. Nature does the opposite: ecosystems maintain health through diversity, balance, and feedback loops that prevent any single element from dominating. This project explored which organisms and natural processes — from light gaps in forests to the immune system in bats — could inform the design of content algorithms that actively support diverse viewpoints and reduce the polarizing effects of conventional recommendation systems.</p></div>
+            </div>
+          </div>
         </div>
 
-        <div class="project">
-          <div class="project-label">Chemistry</div>
-          <h3>Nature-inspired alternatives to synthetic mosquito repellents</h3>
-          <p>Mosquitoes are responsible for up to one million deaths annually, yet the synthetic compounds used to deter them - DEET chief among them, carry their own risks to human health and the environment. This project asked a different question: how does nature already solve for chemical deterrence, and what can those strategies teach us about designing something safer? One of the champion organisms that emerged was the humble chicken. The volatile compounds emitted by chickens actively repel the malaria-carrying mosquito <em>Anopheles arabiensis</em> by disrupting its ability to identify a suitable host through competitive binding of odorant-specific proteins. The strategy points toward a class of nature-derived repellents that leave no toxic residue and pose no risk to non-target organisms.</p>
+        <div class="accordion project-accordion">
+          <button class="accordion-trigger project-trigger" aria-expanded="false">
+            <div>
+              <div class="project-label">Chemistry</div>
+              <h3>Nature-inspired alternatives to synthetic mosquito repellents</h3>
+            </div>
+            <span class="accordion-icon" aria-hidden="true"></span>
+          </button>
+          <div class="accordion-body" role="region">
+            <div class="accordion-body-inner">
+              <div><p>Mosquitoes are responsible for up to one million deaths annually, yet the synthetic compounds used to deter them - DEET chief among them, carry their own risks to human health and the environment. This project asked a different question: how does nature already solve for chemical deterrence, and what can those strategies teach us about designing something safer? One of the champion organisms that emerged was the humble chicken. The volatile compounds emitted by chickens actively repel the malaria-carrying mosquito <em>Anopheles arabiensis</em> by disrupting its ability to identify a suitable host through competitive binding of odorant-specific proteins. The strategy points toward a class of nature-derived repellents that leave no toxic residue and pose no risk to non-target organisms.</p></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -436,6 +663,33 @@
   </div>
 
   <script src="modal.js"></script>
+  <script>
+    (function() {
+      document.querySelectorAll('.accordion-trigger').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var accordion = btn.closest('.accordion');
+          var isOpen = accordion.classList.contains('open');
+          var isProject = accordion.classList.contains('project-accordion');
+          if (!isProject) {
+            // Close siblings in same section
+            var section = accordion.closest('.work-section');
+            section.querySelectorAll('.accordion').forEach(function(a) {
+              a.classList.remove('open');
+              a.querySelector('.accordion-trigger').setAttribute('aria-expanded', 'false');
+            });
+          }
+          // Toggle clicked one
+          if (!isOpen) {
+            accordion.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          } else if (isProject) {
+            accordion.classList.remove('open');
+            btn.setAttribute('aria-expanded', 'false');
+          }
+        });
+      });
+    })();
+  </script>
 
   <script>
     (function() {
