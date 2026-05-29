@@ -259,14 +259,10 @@
     }
     .accordion-body .offering-detail-list li::before { content: '—'; color: var(--sage); flex-shrink: 0; }
 
-    .project-accordion { margin-bottom: 0; border-radius: 0; border-left: none; border-right: none; border-top: none; border-bottom: 1px solid rgba(92,107,58,0.2); }
-    .project-accordion:first-of-type { border-top: 1px solid rgba(92,107,58,0.2); }
-    .project-accordion::before { display: none; }
-    .project-trigger { padding: 1.8rem 0; align-items: flex-start; }
+    .project-trigger { align-items: flex-start; }
     .project-trigger h3 { font-size: 1.2rem; font-weight: 400; font-family: 'Cormorant Garamond', serif; color: var(--bark); margin: 0; line-height: 1.3; }
     .project-trigger .accordion-icon { margin-top: 0.3rem; }
-    .accordion-body .project-accordion p { color: var(--soil); opacity: 0.82; }
-    .project-accordion .accordion-body-inner > div { padding: 0 0 1.8rem 0; }
+    .project-accordion p { color: var(--soil); opacity: 0.82; }
 
     @media (max-width: 900px) {
       #subnav {
@@ -344,27 +340,28 @@
           <h2><em>Consultation</em></h2>
           <p>Whatever you are looking to solve for, nature has a strategy. Consultation work is for individuals, teams, and organizations that want to bring nature-informed thinking to their challenge. From a product or material design problem to a systems or organizational question, we work together to reframe your challenge through a biological lens, identify the organisms and strategies most relevant to your conditions, and translate what nature has already perfected into something you can apply.</p>
           <p>We work across two complementary disciplines: biomimicry, which abstracts and emulates nature's strategies in design, and nature-based solutions, which deploy nature itself to solve human challenges directly. Part of our work is understanding which fits your situation, or whether a combination of both is the right answer.</p>
+          <p>For most clients, the Compendium is the best fit.</p>
         </div>
         <div class="inner-right">
           <div class="accordion">
             <button class="accordion-trigger" aria-expanded="false">
-              <h3>Champion brief</h3>
+              <h3>The Champion</h3>
               <span class="accordion-icon" aria-hidden="true"></span>
             </button>
             <div class="accordion-body" role="region">
               <div class="accordion-body-inner">
-                <div><p>We provide a focused look at one organism whose strategy applies directly to your challenge. We explain what it does, why it works, and how it can be applied to your problem.</p></div>
+                <div><p>We provide a focused look at one organism whose strategy we think best applies to your challenge. We explain what it does, why it works, and how it can be applied to your problem. A fraction of the Compendium but a great introduction into what biomimicry can offer.</p></div>
               </div>
             </div>
           </div>
           <div class="accordion">
             <button class="accordion-trigger" aria-expanded="false">
-              <h3>Research report</h3>
+              <h3>The Compendium</h3>
               <span class="accordion-icon" aria-hidden="true"></span>
             </button>
             <div class="accordion-body" role="region">
               <div class="accordion-body-inner">
-                <div><p>A full survey of nature's approaches to your challenge. Canvasing a range of organisms, honing in on champion species, and translating their strategies into clear abstracted principles and actionable solutions.</p></div>
+                <div><p>A full survey of nature's approaches to your challenge. Canvasing a range of organisms, honing in on champion species, and translating their strategies into clear abstracted principles and actionable solutions. A robust offer in-line with the Selected Work showcased below.</p></div>
               </div>
             </div>
           </div>
@@ -375,7 +372,7 @@
             </button>
             <div class="accordion-body" role="region">
               <div class="accordion-body-inner">
-                <div><p>A focused consulting call where we dig into your specific problem together. The output is a problem statement reframed through a biological lens, and a clear direction for where to look next.</p></div>
+                <div><p>A focused consulting call where we dig into your specific problem together. The outcome is organic but often includes a problem statement reframed through a biological lens, and a clear direction for where to look next.</p></div>
               </div>
             </div>
           </div>
@@ -440,11 +437,12 @@
           <h2><em>Workshops</em></h2>
           <p>Biomimicry is most powerful when it becomes a shared way of thinking — when it becomes a lens an entire team or community can look through. Workshops are designed to build that capacity: to introduce biomimicry, understand the philosophy, make it accessible, and give participants practical frameworks they can take back and use.</p>
           <p>We offer half-day, full-day, and multi-session formats, adaptable to the group and context — whether that is a corporate team, a university class, a design studio, or a community organization.</p>
+          <p>For most groups, the full-day is where the real work begins.</p>
         </div>
         <div class="inner-right">
           <div class="accordion">
             <button class="accordion-trigger" aria-expanded="false">
-              <h3>Half-day introduction</h3>
+              <h3>Half-day</h3>
               <span class="accordion-icon" aria-hidden="true"></span>
             </button>
             <div class="accordion-body" role="region">
@@ -540,7 +538,7 @@
           </button>
           <div class="accordion-body" role="region">
             <div class="accordion-body-inner">
-              <div><p>ABS plastic degrades under thermal load. A significant problem for outdoor applications where heat accelerates degradation and raises safety concerns. The morpho butterfly and the panther chameleon both manage color and heat through structural means. The morpho through nanoscale iridescent structures that reflect rather than absorb light, and the chameleon through iridophore crystal layers that actively reflect infrared radiation. This project explored how nanolithography could replicate the morpho's nanostructure on the surface of ABS, while a secondary layer of iridophore-inspired crystals mixed into the plastic itself provides redundancy and resilience - ensuring infrared reflection even as the surface weathers over time. Together, the two strategies could reduce infrared thermal load by up to 50%, keeping surfaces cooler, safer, and significantly longer-lasting.</p></div>
+              <div><p>ABS plastic degrades under thermal load. A significant problem for outdoor applications where heat accelerates degradation and raises safety concerns. The morpho butterfly and the panther chameleon both manage color and heat through structural means. The morpho through nanoscale iridescent structures that reflect rather than absorb light, and the chameleon through iridophore crystal layers that actively reflect infrared radiation. This project explored how nanolithography could replicate the morpho's nanostructure on the surface of ABS, while a secondary layer of iridophore-inspired crystals mixed into the plastic itself provides redundancy and resilience - ensuring infrared reflection even as the surface weathers over time. Together, the two strategies could reduce infrared thermal load by up to 50%, making surfaces cooler, safer, and significantly longer-lasting.</p></div>
             </div>
           </div>
         </div>
@@ -564,7 +562,7 @@
           <button class="accordion-trigger project-trigger" aria-expanded="false">
             <div>
               <div class="project-label">Chemistry</div>
-              <h3>Nature-inspired alternatives to synthetic mosquito repellents</h3>
+              <h3>Chicken-inspired alternatives to synthetic mosquito repellents</h3>
             </div>
             <span class="accordion-icon" aria-hidden="true"></span>
           </button>
